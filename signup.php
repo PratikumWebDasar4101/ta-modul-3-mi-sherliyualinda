@@ -11,12 +11,12 @@ if (isset($_SESSION["username"])) {
 	<title>6701174057</title>
 </head>
 <body>
-	<form action="login.php" method="POST">
+	<h2>User Sign Up</h2>
+	<form action="signup.php" method="POST">
 		<input type="text" name="username" placeholder="Username"><br>
 		<input type="password" name="password" placeholder="Password"><br>
 		<input type="submit" name="submit" value="kirim">
 	</form>
-	<a href="signup.php">Sign Up!</a>
 </body>
 </html>
 
@@ -25,15 +25,12 @@ if(isset($_POST['submit'])){
 	$username = $_POST['username'];
 	$password = md5($_POST['password']);
 	 
-	$login = mysql_query("select * from users where username='$username' and password='$password'");
-	$cek = mysql_num_rows($login);
-	if ($cek > 0) {
-		while ($data = mysql_fetch_array($login)) {
-			$_SESSION['username'] = $data['username'];
-		}
+	$signup = mysql_query("INSERT INTO `users`(`username`, `password`) VALUES ('$username','$password')") or die(mysql_error());
+	if ($signup) {
+		$_SESSION['username'] = $username;
 		header("location: index.php");
 	} else {
-		header("location: login.php");
+		mysql_error();
 	}
 }
 ?>

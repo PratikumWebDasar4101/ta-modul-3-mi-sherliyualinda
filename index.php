@@ -23,7 +23,7 @@ if (!isset($_SESSION["username"])) {
 						<form action="data.php" method="POST" enctype="multipart/form-data">
 							<tr>
 								<td><a href="logout.php">Logout</a></td>
-								<td></td>
+								<td><?php echo 'Hai '.$_SESSION['username']; ?></td>
 							</tr>
 							<tr>
 								<td>Nama User</td>
